@@ -1,0 +1,141 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:wght@600;800&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono&display=swap");
+
+:root {
+  --noche: #0b140d;
+  --niebla: #e4eddc;
+  --niebla-suave: #aebfa6;
+  --hoja: #8db36b;
+  --luciernaga: #e0b64a;
+  --panel: rgba(10, 20, 13, .72);
+  --linea: rgba(228, 237, 220, .22);
+}
+
+html { scroll-behavior: smooth; }
+
+/* Fondo: foto del bosque con capa oscura encima para que se lea el texto */
+body {  background-color: #0b140d; 
+}
+  
+#fondo { position: fixed; inset: 0; z-index: -1; }
+#fondo::after {            /* capa oscura encima de las fotos */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(8, 16, 10, .55), rgba(8, 16, 10, .88));
+}
+#fondo .capa {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center top;
+  opacity: 0;
+  transition: opacity 2s ease;
+}
+#fondo .capa.activa { opacity: 1; }
+
+h1, h2, h3 { font-family: "Fraunces", serif; font-weight: 800; }
+section { scroll-margin-top: 72px; }
+
+/* Navbar oscuro y translúcido (sin cambiar navbar-light en el HTML) */
+.navbar {
+  --bs-navbar-color: var(--niebla);
+  --bs-navbar-hover-color: var(--luciernaga);
+  --bs-navbar-active-color: var(--luciernaga);
+  --bs-navbar-brand-color: var(--niebla);
+  --bs-navbar-brand-hover-color: var(--luciernaga);
+  background: rgba(8, 16, 10, .82);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--linea);
+}
+.navbar-brand { font-family: "Fraunces", serif; font-size: 1.4rem; }
+.navbar-toggler { border-color: var(--linea); }
+.navbar-toggler-icon { filter: invert(1); }
+
+/* Portada */
+.hero { background: transparent; color: var(--niebla); padding: 4.5rem 0 3.5rem; }
+.hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  line-height: 1;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, .6);
+}
+
+/* Botón: color luciérnaga; al pasar el mouse se vacía y brilla */
+.btn-ambar {
+  background: var(--luciernaga);
+  color: #1a1608;
+  border: 2px solid var(--luciernaga);
+  border-radius: 2px;
+  font-weight: 600;
+  transition: background .2s, color .2s, box-shadow .2s;
+}
+.btn-ambar:hover {
+  background: transparent;
+  color: var(--luciernaga);
+  border-color: var(--luciernaga);
+  box-shadow: 0 0 18px rgba(224, 182, 74, .35);
+}
+
+/* Tarjetas: paneles oscuros translúcidos */
+.card {
+  --bs-card-bg: var(--panel);
+  --bs-card-color: var(--niebla);
+  --bs-card-border-color: var(--linea);
+  --bs-card-border-radius: 2px;
+  --bs-card-inner-border-radius: 2px;
+  backdrop-filter: blur(6px);
+}
+.row > .card { padding: 0; }
+
+.tarjeta {
+  text-decoration: none;
+  border-left: 4px solid var(--hoja);
+  transition: transform .15s, border-color .15s, background-color .15s;
+}
+.tarjeta:hover {
+  --bs-card-bg: rgba(18, 34, 22, .9);
+  transform: translateY(-4px);
+  border-left-color: var(--luciernaga);
+  color: var(--niebla);
+}
+.tarjeta:focus-visible { outline: 3px solid var(--luciernaga); outline-offset: 2px; }
+.tarjeta .card-title { font-family: "Fraunces", serif; }
+.tarjeta .card-text { color: var(--niebla-suave); }
+
+/* Imágenes */
+.hero-img {
+  width: 100%;
+  max-height: 380px;
+  object-fit: cover;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+}
+.hero .hero-img {
+  border: 6px solid rgba(228, 237, 220, .9);
+  transform: rotate(1.5deg);
+}
+
+/* Datos taxonómicos: etiqueta de museo */
+ul.list-unstyled {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: .95rem;
+  background: var(--panel);
+  border: 1px dashed var(--linea);
+  padding: 1rem 1.25rem;
+}
+ul.list-unstyled strong { color: var(--luciernaga); }
+
+/* QR sobre fondo blanco para que sea legible */
+#qr { background: #fff; padding: 8px; line-height: 0; }
+#qr img, #qr canvas { max-width: 100%; height: auto; }
+
+/* Footer (el !important anula el style="" que tienes en el HTML) */
+footer {
+  background: rgba(8, 16, 10, .85) !important;
+  border-top: 1px solid var(--linea);
+}
+footer.text-dark { color: var(--niebla-suave) !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
