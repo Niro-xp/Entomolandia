@@ -6,7 +6,7 @@ const fotos = [
   "img/forest3.jpg",
   "img/forest4.jpg",
 ];
-const segundos = 8; // tiempo entre cambios
+const segundos = 5; // tiempo entre cambios
 
 // Crea las dos capas que se turnan (así no hace falta tocar el HTML)
 const fondo = document.createElement("div");
